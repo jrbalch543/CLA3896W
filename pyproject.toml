@@ -1,0 +1,221 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["ipums*"]
+
+[project]
+name = "ipums_cli_tools"
+version = "0.5.0"
+description = "IPUMS Python CLI Tools"
+readme = "README.md"
+dependencies = [
+    "ipums-metadata @ git+ssh://git@github.umn.edu/mpc/ipums-metadata@v1.57.0",
+    # Requirements for cpslib aren't automatically installed with pip, but it just needs ipums-metadata
+    "ipums-cpslib @ git+ssh://git@github.umn.edu/mpc/cpslib@master",
+    "click==8.1.3",
+    # ipums-metadata requires a particular version of pandas. We'll use that version too.
+    "pandas==1.5.2",
+    "numpy==1.23.5",
+    "parse==1.18.0",
+    "XlsxWriter==3.1.2",
+    "joblib==1.0.0",
+    "PyYaml==5.3.1",
+    "Jinja2==2.11.2",
+    "jsonargparse~=4.0",
+    "MarkupSafe==1.1.1",
+    "python-docx==1.1.0",
+    "openpyxl>=3.0.5",
+    "pyarrow==10.0.1",
+    "xopen==1.1.0",
+    "polars[pandas]>=0.19.7",
+    "pika",
+    "termcolor",
+    "xlutils",
+    "xlrd",
+    # This is an old version of cjr-client. At some point we should upgrade, but
+    # it will introduce breaking changes.
+    "cjr-client @ git+ssh://git@github.umn.edu/mpc/cjr-client@v0.6.0",
+    # Requirement for cjr-client, which doesn't install dependencies automatically with pip
+    "requests>=2.14,<3",
+    "ipums-metadata-models @ git+ssh://git@github.umn.edu/mpc/ipums-metadata-models@v0.2.2",
+]
+
+
+[project.optional-dependencies]
+dev = ["pytest", "black==24.1.1", "pyflakes", "pytest-sugar", "pytest-cov"]
+
+[project.scripts]
+allocation_crosstab_audit = "ipums.tools.allocation_crosstab_audit:entrypoint"
+asec_family_reformat = "ipums.tools.asec_family_reformat:main"
+atus-data-reconfigure = "ipums.tools.atus_data_reconfigure:main"
+audit_all_projects_metadata = "ipums.tools.audit_all_projects_metadata:main"
+audit_project_metadata = "ipums.tools.audit_project_metadata:main"
+b_to_s_check = "ipums.tools.b_to_s_check:main"
+char_diagnostics = "ipums.tools.char_diagnostics:main"
+check_rabbit_queue = "ipums.tools.check_rabbit_queue:main"
+check_var_groups = "ipums.tools.check_var_groups:main"
+cjr_log_parse = "ipums.tools.cjr_log_parse:main"
+combine_distribution_files = "ipums.tools.combine_distribution_files:main"
+command_maker = "ipums.tools.command_maker:main"
+compare_tables = "ipums.tools.compare_tables:main"
+compare_xls_to_xml = "ipums.tools.compare_xls_to_xml:entrypoint"
+cpsid_check = "ipums.tools.cpsid_check:main"
+cps_ipf_updater = "ipums.tools.cps_ipf_updater:main"
+cps_ipf = "ipums.tools.cps_ipf:main"
+cpsidv_b_to_s = "ipums.tools.cpsidv_b_to_s:main"
+create_all_vars_csv = "ipums.tools.create_all_vars_csv:main"
+cross_quick = "ipums.tools.cross_quick:main"
+data2pipe = "ipums.tools.data2pipe:main"
+data2tmp = "ipums.tools.data2tmp:main"
+dd_to_layout = "ipums.tools.dd_to_layout:main"
+delim_to_fixed = "ipums.tools.delim_to_fixed:main"
+distAg = "ipums.tools.distAg:main"
+do_data_subsetter = "ipums.tools.do_data_subsetter:main"
+do_parse = "ipums.tools.do_parse:main"
+enumeration_text_reporter = "ipums.tools.enumeration_text_reporter:entrypoint"
+find_integrated_mnemonic = "ipums.tools.find_integrated_mnemonic:main"
+find_monetary_missings = "ipums.tools.find_monetary_missings:entrypoint"
+find_multisvar_tt_variables = "ipums.tools.find_multisvar_tt_variables:main"
+find_rules = "ipums.tools.find_rules:main"
+find_svars = "ipums.tools.find_svars:main"
+find_zs_parallel = "ipums.tools.find_zs_parallel:main"
+fix_spss_syntax_files = "ipums.tools.fix_spss_syntax_files:main"
+freaky_quick = "ipums.tools.freaky_quick:main"
+freq_data_dict = "ipums.tools.freq_data_dict:entrypoint"
+freq_quick = "ipums.tools.freq_quick:main"
+fullusa_convert_yaml_to_svarlong = "ipums.tools.fullusa_convert_yaml_to_svarlong:main"
+g-status = "ipums.tools.g_status:main"
+go = "ipums.tools.go:main"
+get_isic = "ipums.tools.get_isic:main"
+gzdo = "ipums.tools.gzdo:main"
+glimpse = "ipums.tools.glimpse:main"
+gzsps = "ipums.tools.gzsps:entrypoint"
+integrated_vars_in_sample = "ipums.tools.integrated_vars_in_sample:main"
+kill-cjr-framework = "ipums.tools.kill_cjr_framework:main"
+kill-mdserver = "ipums.tools.kill_mdserver:entrypoint"
+leftside_B_clean = "ipums.tools.leftside_B_clean:main"
+link_svars = "ipums.tools.link_svars:main"
+list_input_data_files = "ipums.tools.list_input_data_files:main"
+lookup_groups_updater = "ipums.tools.lookup_groups_updater:main"
+markup_compare_stages_log = "ipums.tools.markup_compare_stages_log:main"
+mepsmunger_init = "ipums.tools.mepsmunger_init:main"
+meps_panel_splitter = "ipums.tools.meps_panel_splitter:doTheThings"
+merge_dd_svars = "ipums.tools.merge_dd_svars:entrypoint"
+mtus_activity_time_fix = "ipums.tools.mtus_activity_time_fix:main"
+mtus_layout_checker = "ipums.tools.mtus_layout_checker:main"
+mv_restricted_full_count = "ipums.tools.mv_restricted_full_count:entrypoint"
+project_shapefile_zipper = "ipums.tools.project_shapefile_zipper:main"
+right_justify = "ipums.tools.right_justify:main"
+right_pad = "ipums.tools.right_pad:main"
+samples_control_updater = "ipums.tools.samples_control_updater:main"
+sas_parse = "ipums.tools.sas_parse:main"
+send_to_cluster = "ipums.tools.send_to_cluster:main"
+sps_parse = "ipums.tools.sps_parse:main"
+statfile_parse = "ipums.tools.statfile_parse:main"
+stats_files_post_processer = "ipums.tools.stats_files_post_processer:main"
+svar_to_info = "ipums.tools.svar_to_info:main"
+svar_to_integrated = "ipums.tools.svar_to_integrated:entrypoint"
+svars_not_integrated = "ipums.tools.svars_not_integrated:main"
+tagging_audit = "ipums.tools.tagging_audit:main"
+unused_origrts = "ipums.tools.unused_origrts:main"
+variables_to_svars = "ipums.tools.variables_to_svars:main"
+usa_run_configs = "ipums.tools.usa_run_configs:main"
+tt_find_hidden_codes = "ipums.tools.tt_find_hidden_codes:main"
+validate_xml_metadata = "ipums.tools.validate_xml_metadata:main"
+tt_creator = "ipums.tools.tt_creator:main"
+tt_updater_config_constructor = "ipums.tools.tt_updater_config_constructor:main"
+vd_create = "ipums.tools.vd_create:main"
+xlsx_file_fixer = "ipums.tools.xlsx_file_fixer:main"
+update_tt_sample_info = "ipums.tools.update_tt_sample_info:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.pydeploy]
+conda_env = "ipums_cli_tools"
+python_version = "3.10.11"
+pydeploy_version = "1"
+test_runners = ["pytest"]
+extra_target_servers = ["spss.pop.umn.edu"]
+
+[tool.pydeploy.exec.allocation_crosstab_audit]
+[tool.pydeploy.exec.asec_family_reformat]
+[tool.pydeploy.exec.atus-data-reconfigure]
+[tool.pydeploy.exec.audit_all_projects_metadata]
+[tool.pydeploy.exec.audit_project_metadata]
+[tool.pydeploy.exec.b_to_s_check]
+[tool.pydeploy.exec.char_diagnostics]
+[tool.pydeploy.exec.check_rabbit_queue]
+[tool.pydeploy.exec.check_var_groups]
+[tool.pydeploy.exec.cjr_log_parse]
+[tool.pydeploy.exec.combine_distribution_files]
+[tool.pydeploy.exec.command_maker]
+[tool.pydeploy.exec.compare_tables]
+[tool.pydeploy.exec.compare_xls_to_xml]
+[tool.pydeploy.exec.cpsid_check]
+[tool.pydeploy.exec.cpsidv_b_to_s]
+[tool.pydeploy.exec.cps_ipf_updater]
+[tool.pydeploy.exec.create_all_vars_csv]
+[tool.pydeploy.exec.cross_quick]
+[tool.pydeploy.exec.data2pipe]
+[tool.pydeploy.exec.data2tmp]
+[tool.pydeploy.exec.delim_to_fixed]
+[tool.pydeploy.exec.dd_to_layout]
+[tool.pydeploy.exec.distAg]
+[tool.pydeploy.exec.do_data_subsetter]
+[tool.pydeploy.exec.enumeration_text_reporter]
+[tool.pydeploy.exec.find_integrated_mnemonic]
+[tool.pydeploy.exec.find_monetary_missings]
+[tool.pydeploy.exec.find_multisvar_tt_variables]
+[tool.pydeploy.exec.find_rules]
+[tool.pydeploy.exec.find_svars]
+[tool.pydeploy.exec.fix_spss_syntax_files]
+[tool.pydeploy.exec.freaky_quick]
+[tool.pydeploy.exec.freq_data_dict]
+[tool.pydeploy.exec.freq_quick]
+[tool.pydeploy.exec.fullusa_convert_yaml_to_svarlong]
+[tool.pydeploy.exec.gzsps]
+[tool.pydeploy.exec.g-status]
+[tool.pydeploy.exec.get_isic]
+[tool.pydeploy.exec.glimpse]
+auto_page = true
+[tool.pydeploy.exec.go]
+[tool.pydeploy.exec.gzdo]
+[tool.pydeploy.exec.integrated_vars_in_sample]
+[tool.pydeploy.exec.kill-cjr-framework]
+[tool.pydeploy.exec.kill-mdserver]
+[tool.pydeploy.exec.leftside_B_clean]
+[tool.pydeploy.exec.link_svars]
+[tool.pydeploy.exec.list_input_data_files]
+[tool.pydeploy.exec.lookup_groups_updater]
+[tool.pydeploy.exec.markup_compare_stages_log]
+[tool.pydeploy.exec.mepsmunger_init]
+[tool.pydeploy.exec.meps_panel_splitter]
+[tool.pydeploy.exec.merge_dd_svars]
+[tool.pydeploy.exec.mtus_activity_time_fix]
+[tool.pydeploy.exec.mtus_layout_checker]
+[tool.pydeploy.exec.mv_restricted_full_count]
+[tool.pydeploy.exec.project_shapefile_zipper]
+[tool.pydeploy.exec.right_justify]
+[tool.pydeploy.exec.right_pad]
+[tool.pydeploy.exec.samples_control_updater]
+[tool.pydeploy.exec.send_to_cluster]
+[tool.pydeploy.exec.sps_parse]
+[tool.pydeploy.exec.statfile_parse]
+[tool.pydeploy.exec.stats_files_post_processer]
+[tool.pydeploy.exec.svar_to_info]
+[tool.pydeploy.exec.svar_to_integrated]
+[tool.pydeploy.exec.svars_not_integrated]
+[tool.pydeploy.exec.tagging_audit]
+[tool.pydeploy.exec.unused_origrts]
+[tool.pydeploy.exec.variables_to_svars]
+[tool.pydeploy.exec.usa_run_configs]
+[tool.pydeploy.exec.tt_find_hidden_codes]
+[tool.pydeploy.exec.validate_xml_metadata]
+[tool.pydeploy.exec.tt_updater_config_constructor]
+[tool.pydeploy.exec.vd_create]
+[tool.pydeploy.exec.update_tt_sample_info]
+[tool.pydeploy.exec.cps_ipf]
