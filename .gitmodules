@@ -1,3 +1,6 @@
 [submodule "ORM"]
 	path = ORM
 	url = https://github.umn.edu/mpc/ipums-metadata-models
+[submodule "DBReports"]
+	path = DBReports
+	url = https://github.umn.edu/mpc/ipumsdb
